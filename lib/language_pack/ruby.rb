@@ -455,8 +455,10 @@ params = CGI.parse(uri.query || "")
   end
 
   def run_generate_rake_task
-    topic "Running: rake generate"
-    pipe("env PATH=$PATH bundle exec rake generate")
+    if rake_task_defined?("generate")
+      topic "Running: rake generate"
+      pipe("env PATH=$PATH bundle exec rake generate")
+    end
   end
     
 end
