@@ -53,6 +53,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       create_database_yml
       install_binaries
       run_assets_precompile_rake_task
+      run_generate_rake_task
     end
   end
 
@@ -452,4 +453,10 @@ params = CGI.parse(uri.query || "")
       pipe("env PATH=$PATH:bin bundle exec rake assets:precompile 2>&1")
     end
   end
+
+  def run_generate_rake_task
+    topic "Running: rake generate"
+    pipe("env PATH=$PATH bundle exec rake generate")
+  end
+    
 end
